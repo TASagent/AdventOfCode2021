@@ -11,6 +11,8 @@ public readonly struct Vector3D
     public static readonly Vector3D YAxis = new Vector3D(0.0, 1.0, 0.0);
     public static readonly Vector3D ZAxis = new Vector3D(0.0, 0.0, 1.0);
 
+    public double Length => Math.Sqrt(x * x + y * y + z * z);
+
     public Vector3D(double x, double y, double z)
     {
         this.x = x;
@@ -56,7 +58,8 @@ public readonly struct Vector3D
     public static Vector3D operator /(in Vector3D lhs, double rhs) =>
         new Vector3D(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs);
 
-    public double Length => Math.Sqrt(x * x + y * y + z * z);
+    public static Vector3D operator -(in Vector3D value) =>
+        new Vector3D(-value.x, -value.y, -value.z);
 
     public void Deconstruct(out double x, out double y, out double z)
     {
@@ -64,6 +67,4 @@ public readonly struct Vector3D
         y = this.y;
         z = this.z;
     }
-
-    public Vector4D AsVector4D => new Vector4D(x, y, z, 0.0);
 }

@@ -13,6 +13,8 @@ public readonly struct Vector4D
     public static readonly Vector4D ZAxis = new Vector4D(0.0, 0.0, 1.0, 0.0);
     public static readonly Vector4D WAxis = new Vector4D(0.0, 0.0, 0.0, 1.0);
 
+    public double Length => Math.Sqrt(x * x + y * y + z * z + w * w);
+
     public Vector4D(double x, double y, double z, double w)
     {
         this.x = x;
@@ -59,7 +61,8 @@ public readonly struct Vector4D
     public static Vector4D operator /(in Vector4D lhs, double rhs) =>
         new Vector4D(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs);
 
-    public double Length => Math.Sqrt(x * x + y * y + z * z + w * w);
+    public static Vector4D operator -(in Vector4D value) =>
+        new Vector4D(-value.x, -value.y, -value.z, -value.w);
 
     public void Deconstruct(out double x, out double y, out double z, out double w)
     {

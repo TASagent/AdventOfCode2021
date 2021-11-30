@@ -11,6 +11,9 @@ public readonly struct Point3D
     public static readonly Point3D YAxis = new Point3D(0, 1, 0);
     public static readonly Point3D ZAxis = new Point3D(0, 0, 1);
 
+    public int TaxiCabLength => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+    public double GeometricLength => Math.Sqrt(x * x + y * y + z * z);
+
     public Point3D(int x, int y, int z)
     {
         this.x = x;
@@ -53,8 +56,8 @@ public readonly struct Point3D
         new Point3D(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
     public static Point3D operator *(int lhs, in Point3D rhs) =>
         new Point3D(rhs.x * lhs, rhs.y * lhs, rhs.z * lhs);
-
-    public int Length => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+    public static Point3D operator -(in Point3D value) =>
+        new Point3D(-value.x, -value.y, -value.z);
 
     public void Deconstruct(out int x, out int y, out int z)
     {
@@ -62,6 +65,4 @@ public readonly struct Point3D
         y = this.y;
         z = this.z;
     }
-
-    public Point4D AsPoint4D => new Point4D(x, y, z, 0);
 }

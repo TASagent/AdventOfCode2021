@@ -9,6 +9,8 @@ public readonly struct Vector2D
     public static readonly Vector2D XAxis = new Vector2D(1.0, 0.0);
     public static readonly Vector2D YAxis = new Vector2D(0.0, 1.0);
 
+    public readonly double Length => Math.Sqrt(x * x + y * y);
+
     public Vector2D(double x, double y)
     {
         this.x = x;
@@ -50,14 +52,12 @@ public readonly struct Vector2D
     public static Vector2D operator /(in Vector2D lhs, double rhs) =>
         new Vector2D(lhs.x / rhs, lhs.y / rhs);
 
-    public double Length => Math.Sqrt(x * x + y * y);
+    public static Vector2D operator -(in Vector2D value) =>
+        new Vector2D(-value.x, -value.y);
 
     public void Deconstruct(out double x, out double y)
     {
         x = this.x;
         y = this.y;
     }
-
-    public Vector3D AsVector3D => new Vector3D(x, y, 0.0);
-    public Vector4D AsVector4D => new Vector4D(x, y, 0.0, 0.0);
 }

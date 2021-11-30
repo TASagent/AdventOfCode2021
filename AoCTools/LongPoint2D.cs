@@ -9,6 +9,9 @@ public readonly struct LongPoint2D
     public static readonly LongPoint2D XAxis = new LongPoint2D(1, 0);
     public static readonly LongPoint2D YAxis = new LongPoint2D(0, 1);
 
+    public long TaxiCabLength => Math.Abs(x) + Math.Abs(y);
+    public double GeometricLength => Math.Sqrt(x * x + y * y);
+
     public LongPoint2D(long x, long y)
     {
         this.x = x;
@@ -48,10 +51,8 @@ public readonly struct LongPoint2D
     public static LongPoint2D operator *(long lhs, in LongPoint2D rhs) =>
         new LongPoint2D(rhs.x * lhs, rhs.y * lhs);
 
-    public long Length => Math.Abs(x) + Math.Abs(y);
-
-    public LongPoint3D AsLongPoint3D => new LongPoint3D(x, y, 0);
-    public LongPoint4D AsLongPoint4D => new LongPoint4D(x, y, 0, 0);
+    public static LongPoint2D operator -(in LongPoint2D value) =>
+        new LongPoint2D(-value.x, -value.y);
 
     public void Deconstruct(out long x, out long y)
     {

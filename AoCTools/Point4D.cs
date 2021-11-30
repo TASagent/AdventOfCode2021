@@ -13,6 +13,9 @@ public readonly struct Point4D
     public static readonly Point4D ZAxis = new Point4D(0, 0, 1, 0);
     public static readonly Point4D WAxis = new Point4D(0, 0, 0, 1);
 
+    public int TaxiCabLength => Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
+    public double GeometricLength => Math.Sqrt(x * x + y * y + z * z + w * w);
+
     public Point4D(int x, int y, int z, int w)
     {
         this.x = x;
@@ -57,7 +60,8 @@ public readonly struct Point4D
     public static Point4D operator *(int lhs, in Point4D rhs) =>
         new Point4D(rhs.x * lhs, rhs.y * lhs, rhs.z * lhs, rhs.w * lhs);
 
-    public int Length => Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
+    public static Point4D operator -(in Point4D value) =>
+        new Point4D(-value.x, -value.y, -value.z, -value.w);
 
     public void Deconstruct(out int x, out int y, out int z, out int w)
     {

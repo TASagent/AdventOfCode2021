@@ -11,6 +11,9 @@ public readonly struct LongPoint3D
     public static readonly LongPoint3D YAxis = new LongPoint3D(0, 1, 0);
     public static readonly LongPoint3D ZAxis = new LongPoint3D(0, 0, 1);
 
+    public long TaxiCabLength => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+    public double GeometricLength => Math.Sqrt(x * x + y * y + z * z);
+
     public LongPoint3D(long x, long y, long z)
     {
         this.x = x;
@@ -54,9 +57,8 @@ public readonly struct LongPoint3D
     public static LongPoint3D operator *(long lhs, in LongPoint3D rhs) =>
         new LongPoint3D(rhs.x * lhs, rhs.y * lhs, rhs.z * lhs);
 
-    public long Length => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
-
-    public LongPoint4D AsLongPoint4D => new LongPoint4D(x, y, z, 0);
+    public static LongPoint3D operator -(in LongPoint3D value) =>
+        new LongPoint3D(-value.x, -value.y, -value.z);
 
     public void Deconstruct(out long x, out long y, out long z)
     {

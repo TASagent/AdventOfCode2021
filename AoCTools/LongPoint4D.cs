@@ -13,6 +13,9 @@ public readonly struct LongPoint4D
     public static readonly LongPoint4D ZAxis = new LongPoint4D(0, 0, 1, 0);
     public static readonly LongPoint4D WAxis = new LongPoint4D(0, 0, 0, 1);
 
+    public long TaxiCabLength => Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
+    public double GeometricLength => Math.Sqrt(x * x + y * y + z * z + w * w);
+
     public LongPoint4D(long x, long y, long z, long w)
     {
         this.x = x;
@@ -57,7 +60,8 @@ public readonly struct LongPoint4D
     public static LongPoint4D operator *(long lhs, in LongPoint4D rhs) =>
         new LongPoint4D(rhs.x * lhs, rhs.y * lhs, rhs.z * lhs, rhs.w * lhs);
 
-    public long Length => Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
+    public static LongPoint4D operator -(in LongPoint4D value) =>
+        new LongPoint4D(-value.x, -value.y, -value.z, -value.w);
 
     public void Deconstruct(out long x, out long y, out long z, out long w)
     {
