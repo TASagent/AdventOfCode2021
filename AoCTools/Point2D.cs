@@ -51,6 +51,9 @@ public readonly struct Point2D
     public static Point2D operator *(int lhs, in Point2D rhs) =>
         new Point2D(rhs.x * lhs, rhs.y * lhs);
 
+    public static Point2D operator /(in Point2D lhs, in int value) =>
+        new Point2D(lhs.x / value, lhs.y / value);
+
     public static Point2D operator -(in Point2D value) =>
         new Point2D(-value.x, -value.y);
 

@@ -1,33 +1,56 @@
-﻿
-const string inputFile = @"../../../../input06.txt";
+﻿const string inputFile = @"../../../../input06.txt";
 
 
-Console.WriteLine("Day 06 - UNKNOWN");
+Console.WriteLine("Day 06 - Lanternfish ");
 Console.WriteLine("Star 1");
 Console.WriteLine();
 
-int output1 = 0;
-int output2 = 0;
 
+List<int> ages = File.ReadAllText(inputFile)
+    .Split(',')
+    .Select(int.Parse)
+    .ToList();
 
-Console.WriteLine(File.ReadAllText(inputFile));
+long newborns = 0;
+long almostReadies = 0;
+int dayIndex = 0;
 
+long[] ageBins = new long[7];
 
+for (int i = 0; i < 7; i++)
+{
+    ageBins[i] = ages.Count(x => x == i);
+}
+almostReadies = ages.Count(x => x == 7);
+newborns = ages.Count(x => x == 8);
 
+for (int i = 0; i < 80; i++)
+{
+    long currentFish = ageBins[dayIndex];
+    ageBins[dayIndex] += almostReadies;
+    almostReadies = newborns;
+    newborns = currentFish;
 
+    dayIndex = (dayIndex + 1) % 7;
+}
 
-
-
-
-
-
-Console.WriteLine($"The answer is: {output1}");
+Console.WriteLine($"The answer is: {ageBins.Sum() + newborns + almostReadies}");
 
 Console.WriteLine();
 Console.WriteLine("Star 2");
 Console.WriteLine();
 
-Console.WriteLine($"The answer is: {output2}");
+for (int i = 80; i < 256; i++)
+{
+    long currentFish = ageBins[dayIndex];
+    ageBins[dayIndex] += almostReadies;
+    almostReadies = newborns;
+    newborns = currentFish;
+
+    dayIndex = (dayIndex + 1) % 7;
+}
+
+Console.WriteLine($"The answer is: {ageBins.Sum() + newborns + almostReadies}");
 
 
 

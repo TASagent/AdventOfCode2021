@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day01", "Day01\Day01.csproj", "{7463F18E-1E25-4780-9240-0B5CC4C93A00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day01 - Sonar Sweep", "Day01\Day01 - Sonar Sweep.csproj", "{7463F18E-1E25-4780-9240-0B5CC4C93A00}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoCTools", "AoCTools\AoCTools.csproj", "{EA897D21-AA92-4132-821C-F990BC4A453E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02", "Day02\Day02.csproj", "{906886D4-BCCF-4984-8AB3-6B0E50B8E247}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02 - Dive", "Day02\Day02 - Dive.csproj", "{906886D4-BCCF-4984-8AB3-6B0E50B8E247}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03", "Day03\Day03.csproj", "{BAA1960A-0317-4650-8CAB-79A44D4596B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03 - Binary Diagnostic", "Day03\Day03 - Binary Diagnostic.csproj", "{BAA1960A-0317-4650-8CAB-79A44D4596B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day04", "Day04\Day04.csproj", "{3BD9C25D-F9DF-4B6D-BFA8-82622B12753C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day04 - Giant Squid", "Day04\Day04 - Giant Squid.csproj", "{3BD9C25D-F9DF-4B6D-BFA8-82622B12753C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day05", "Day05\Day05.csproj", "{7DBE1C8C-E059-43E2-8767-8CF4FC196F3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day05 - Hydrothermal Venture", "Day05\Day05 - Hydrothermal Venture.csproj", "{7DBE1C8C-E059-43E2-8767-8CF4FC196F3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day06", "Day06\Day06.csproj", "{2A8321A6-4858-4045-9E67-5168A4FDC1E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day06 - Lanternfish", "Day06\Day06 - Lanternfish.csproj", "{2A8321A6-4858-4045-9E67-5168A4FDC1E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day07", "Day07\Day07.csproj", "{F37DB364-99CC-4B13-B0CA-0CCC4B741154}"
 EndProject
@@ -54,6 +54,35 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day24", "Day24\Day24.csproj", "{BC04862E-D130-493A-B7E4-9FC4890D62A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day25", "Day25\Day25.csproj", "{3E5DD013-6887-40B1-94D4-48D73E4A0427}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89708153-E258-4606-A4CD-4D7726648644}"
+	ProjectSection(SolutionItems) = preProject
+		input01.txt = input01.txt
+		input02.txt = input02.txt
+		input03.txt = input03.txt
+		input04.txt = input04.txt
+		input05.txt = input05.txt
+		input06.txt = input06.txt
+		input07.txt = input07.txt
+		input08.txt = input08.txt
+		input09.txt = input09.txt
+		input10.txt = input10.txt
+		input11.txt = input11.txt
+		input12.txt = input12.txt
+		input13.txt = input13.txt
+		input14.txt = input14.txt
+		input15.txt = input15.txt
+		input16.txt = input16.txt
+		input17.txt = input17.txt
+		input18.txt = input18.txt
+		input19.txt = input19.txt
+		input20.txt = input20.txt
+		input21.txt = input21.txt
+		input22.txt = input22.txt
+		input23.txt = input23.txt
+		input24.txt = input24.txt
+		input25.txt = input25.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
