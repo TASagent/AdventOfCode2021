@@ -20,6 +20,18 @@ public static class PointExtensions
         yield return point - Point2D.YAxis;
     }
 
+    public static IEnumerable<Point2D> GetFullAdjacent(this Point2D point)
+    {
+        yield return point + Point2D.XAxis;
+        yield return point + Point2D.XAxis + Point2D.YAxis;
+        yield return point + Point2D.YAxis;
+        yield return point - Point2D.XAxis + Point2D.YAxis;
+        yield return point - Point2D.XAxis;
+        yield return point - Point2D.XAxis - Point2D.YAxis;
+        yield return point - Point2D.YAxis;
+        yield return point - Point2D.YAxis + Point2D.XAxis;
+    }
+
     public static int Dot(in this Point2D point, in Point2D other) =>
         point.x * other.x + point.y * other.y;
 

@@ -17,17 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day05 - Hydrothermal Ventur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day06 - Lanternfish", "Day06\Day06 - Lanternfish.csproj", "{2A8321A6-4858-4045-9E67-5168A4FDC1E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day07", "Day07\Day07.csproj", "{F37DB364-99CC-4B13-B0CA-0CCC4B741154}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day07 - The Treachery of Whales", "Day07\Day07 - The Treachery of Whales.csproj", "{F37DB364-99CC-4B13-B0CA-0CCC4B741154}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day08", "Day08\Day08.csproj", "{C40C0F2F-E0F1-41E0-BE9A-84292FED7AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day08 - Seven Segment Search", "Day08\Day08 - Seven Segment Search.csproj", "{C40C0F2F-E0F1-41E0-BE9A-84292FED7AD6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day09", "Day09\Day09.csproj", "{DEA626D7-1DF0-480B-B99F-6BF3CB40D370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day09 - Smoke Basin", "Day09\Day09 - Smoke Basin.csproj", "{DEA626D7-1DF0-480B-B99F-6BF3CB40D370}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day10", "Day10\Day10.csproj", "{6EC26F05-1119-4B2B-862E-53260A5CA820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day10 - Syntax Scoring", "Day10\Day10 - Syntax Scoring.csproj", "{6EC26F05-1119-4B2B-862E-53260A5CA820}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day11", "Day11\Day11.csproj", "{33346425-4E88-4677-8CEB-4444C0988B1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day11 - Dumbo Octopus", "Day11\Day11 - Dumbo Octopus.csproj", "{33346425-4E88-4677-8CEB-4444C0988B1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12", "Day12\Day12.csproj", "{6DC9F730-F708-4576-86AE-1EF7AEAF7C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12 - Passage Pathing", "Day12\Day12 - Passage Pathing.csproj", "{6DC9F730-F708-4576-86AE-1EF7AEAF7C4B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day13", "Day13\Day13.csproj", "{B3AE63CF-1BD7-45B0-B6E1-9F8148374B6B}"
 EndProject
@@ -68,6 +68,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		input09.txt = input09.txt
 		input10.txt = input10.txt
 		input11.txt = input11.txt
+		input11Test.txt = input11Test.txt
 		input12.txt = input12.txt
 		input13.txt = input13.txt
 		input14.txt = input14.txt
