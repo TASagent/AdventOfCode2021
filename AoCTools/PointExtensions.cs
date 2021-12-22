@@ -22,14 +22,14 @@ public static class PointExtensions
 
     public static IEnumerable<Point2D> GetFullAdjacent(this Point2D point)
     {
-        yield return point + Point2D.XAxis;
-        yield return point + Point2D.XAxis + Point2D.YAxis;
-        yield return point + Point2D.YAxis;
-        yield return point - Point2D.XAxis + Point2D.YAxis;
-        yield return point - Point2D.XAxis;
         yield return point - Point2D.XAxis - Point2D.YAxis;
         yield return point - Point2D.YAxis;
-        yield return point - Point2D.YAxis + Point2D.XAxis;
+        yield return point + Point2D.XAxis - Point2D.YAxis;
+        yield return point - Point2D.XAxis;
+        yield return point - Point2D.XAxis + Point2D.YAxis;
+        yield return point + Point2D.YAxis;
+        yield return point + Point2D.XAxis + Point2D.YAxis;
+        yield return point + Point2D.XAxis;
     }
 
     public static int Dot(in this Point2D point, in Point2D other) =>
@@ -172,6 +172,33 @@ public static class PointExtensions
 
         return new Point3D(maxX, maxY, maxZ);
     }
+
+    /// <summary>
+    /// Rotates around the X-Axis by 90-Degrees
+    /// </summary>
+    public static Point3D RotateX(in this Point3D point, bool positive) =>
+        new Point3D(
+            x: point.x,
+            y: positive ? -point.z : point.z,
+            z: positive ? point.y : -point.y);
+
+    /// <summary>
+    /// Rotates around the Y-Axis by 90-Degrees
+    /// </summary>
+    public static Point3D RotateY(in this Point3D point, bool positive) =>
+        new Point3D(
+            x: positive ? point.z : -point.z,
+            y: point.y,
+            z: positive ? -point.x : point.x);
+
+    /// <summary>
+    /// Rotates around the Z-Axis by 90-Degrees
+    /// </summary>
+    public static Point3D RotateZ(in this Point3D point, bool positive) =>
+        new Point3D(
+            x: positive ? -point.y : point.y,
+            y: positive ? point.x : -point.x,
+            z: point.z);
 
     #endregion Point3D
     #region Point4D

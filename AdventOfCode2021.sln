@@ -41,13 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day17 - Trick Shot", "Day17
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day18 - Snailfish", "Day18\Day18 - Snailfish.csproj", "{438ADDD8-2D2E-45A1-B977-F57BFD2BB5F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day19", "Day19\Day19.csproj", "{A77023ED-4289-47B6-B844-9AF1426482C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day19 - Beacon Scanner", "Day19\Day19 - Beacon Scanner.csproj", "{A77023ED-4289-47B6-B844-9AF1426482C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day20", "Day20\Day20.csproj", "{37559FAF-7477-427D-B777-0BE42CDA6D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day20 - Trench Map", "Day20\Day20 - Trench Map.csproj", "{37559FAF-7477-427D-B777-0BE42CDA6D22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day21", "Day21\Day21.csproj", "{F99B6FA5-E0BB-42D0-AA8A-57977035A916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day21 - Dirac Dice", "Day21\Day21 - Dirac Dice.csproj", "{F99B6FA5-E0BB-42D0-AA8A-57977035A916}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22", "Day22\Day22.csproj", "{808A8581-7C69-4E20-8957-A031C79A6490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22 - Reactor Reboot", "Day22\Day22 - Reactor Reboot.csproj", "{808A8581-7C69-4E20-8957-A031C79A6490}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day23", "Day23\Day23.csproj", "{CEA35C1C-8849-4FAE-9121-E7F5A5910206}"
 EndProject
@@ -77,6 +77,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		input17.txt = input17.txt
 		input18.txt = input18.txt
 		input19.txt = input19.txt
+		input19Test.txt = input19Test.txt
 		input20.txt = input20.txt
 		input21.txt = input21.txt
 		input22.txt = input22.txt
