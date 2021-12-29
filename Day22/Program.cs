@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Numerics;
 using AoCTools;
 
 const string inputFile = @"../../../../input22.txt";
@@ -19,7 +20,7 @@ Point3D zoneMax = (50, 50, 50);
 
 HashSet<Point3D> activatedPoints = new HashSet<Point3D>();
 
-foreach(Box box in ranges)
+foreach (Box box in ranges)
 {
     if (box.max.x < zoneMin.x ||
         box.max.y < zoneMin.y ||
@@ -81,27 +82,122 @@ Console.WriteLine();
 //    }
 //}
 
-List<Box> boxes = new List<Box>();
+List<Box> placedBoxes = new List<Box>();
+Stack<Box> pendingBoxes = new Stack<Box>();
 
-foreach (Box box in (ranges as IEnumerable<Box>).Reverse())
+foreach (Box inputBox in ranges)
 {
-    if (!boxes.Any(x=> box.Collides(x)))
+    pendingBoxes.Push(inputBox);
+}
+
+
+while (pendingBoxes.Count > 0)
+{
+    Box newBox = pendingBoxes.Pop();
+
+    if (!placedBoxes.Any(x => newBox.Collides(x)))
     {
-        boxes.Add(box);
+        placedBoxes.Add(newBox);
     }
     else
     {
         //Nightmares begin
-        List<Box> newBoxes = new List<Box>();
 
+        //Grab the first colliding box
+        Box collidingBox = placedBoxes.First(x => newBox.Collides(x));
 
+        if (newBox.min.x < collidingBox.min.x)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: newBox.min,
+                max: new Point3D(
+                    x: collidingBox.min.x - 1,
+                    y: newBox.max.y,
+                    z: newBox.max.z)));
 
+            newBox = new Box(
+                on: newBox.on,
+                min: (collidingBox.min.x, newBox.min.y, newBox.min.z),
+                max: newBox.max);
+        }
+
+        if (newBox.max.x > collidingBox.max.x)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: new Point3D(
+                    x: collidingBox.max.x + 1,
+                    y: newBox.min.y,
+                    z: newBox.min.z),
+                max: newBox.max));
+
+            newBox = new Box(
+                on: newBox.on,
+                min: newBox.min,
+                max: (collidingBox.max.x, newBox.max.y, newBox.max.z));
+        }
+
+        if (newBox.min.y < collidingBox.min.y)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: newBox.min,
+                max: new Point3D(
+                    x: newBox.max.x,
+                    y: collidingBox.min.y - 1,
+                    z: newBox.max.z)));
+
+            newBox = new Box(
+                on: newBox.on,
+                min: (newBox.min.x, collidingBox.min.y, newBox.min.z),
+                max: newBox.max);
+        }
+
+        if (newBox.max.y > collidingBox.max.y)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: new Point3D(
+                    x: newBox.min.x,
+                    y: collidingBox.max.y + 1,
+                    z: newBox.min.z),
+                max: newBox.max));
+
+            newBox = new Box(
+                on: newBox.on,
+                min: newBox.min,
+                max: (newBox.max.x, collidingBox.max.y, newBox.max.z));
+        }
+
+        if (newBox.min.z < collidingBox.min.z)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: newBox.min,
+                max: new Point3D(
+                    x: newBox.max.x,
+                    y: newBox.max.y,
+                    z: collidingBox.min.z - 1)));
+        }
+
+        if (newBox.max.z > collidingBox.max.z)
+        {
+            pendingBoxes.Push(new Box(
+                on: newBox.on,
+                min: new Point3D(
+                    x: newBox.min.x,
+                    y: newBox.min.y,
+                    z: collidingBox.max.z + 1),
+                max: newBox.max));
+        }
     }
 }
 
+BigInteger total = placedBoxes.Aggregate(0, (BigInteger value, Box box) =>
+    value + box.GetLitCount());
 
-
-Console.WriteLine($"The answer is: {0}");
+Console.WriteLine($"The answer is: {total}");
 
 Console.WriteLine();
 Console.ReadKey();
@@ -147,6 +243,18 @@ readonly struct Box
         this.max = max;
     }
 
+    public BigInteger GetLitCount()
+    {
+        if (!on)
+        {
+            return 0;
+        }
+
+        Point3D size = ((1, 1, 1) + max - min);
+
+        return (BigInteger)size.x * (BigInteger)size.y * (BigInteger)size.z;
+    }
+
     public bool Collides(in Box other)
     {
         if (other.max.x < min.x || max.x < other.min.x ||
@@ -158,4 +266,7 @@ readonly struct Box
 
         return true;
     }
+
+    public override string ToString() =>
+        $"{(on ? "on " : "off")} x={min.x}..{max.x},y={min.y}..{max.y},z={min.z}..{max.z} : {GetLitCount()}";
 }
