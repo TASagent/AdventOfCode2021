@@ -1,4 +1,5 @@
 ﻿using AoCTools;
+using System.Text;
 
 const string inputFile = @"../../../../input23.txt";
 
@@ -10,18 +11,19 @@ string[] lines = File.ReadAllLines(inputFile);
 
 Dictionary<Point2D, Room> roomLookup = new Dictionary<Point2D, Room>();
 Dictionary<Flavor, Room[]> targetRooms = new Dictionary<Flavor, Room[]>();
+Dictionary<string, int> costMap = new Dictionary<string, int>();
 
-AddRoom(new Room((0, 0), Flavor.Room));
-AddRoom(new Room((1, 0), Flavor.Room));
+AddRoom(new Room((0, 0), Flavor.Hallway));
+AddRoom(new Room((1, 0), Flavor.Hallway));
 AddRoom(new Room((2, 0), Flavor.Doorway));
-AddRoom(new Room((3, 0), Flavor.Room));
+AddRoom(new Room((3, 0), Flavor.Hallway));
 AddRoom(new Room((4, 0), Flavor.Doorway));
-AddRoom(new Room((5, 0), Flavor.Room));
+AddRoom(new Room((5, 0), Flavor.Hallway));
 AddRoom(new Room((6, 0), Flavor.Doorway));
-AddRoom(new Room((7, 0), Flavor.Room));
+AddRoom(new Room((7, 0), Flavor.Hallway));
 AddRoom(new Room((8, 0), Flavor.Doorway));
-AddRoom(new Room((9, 0), Flavor.Room));
-AddRoom(new Room((10, 0), Flavor.Room));
+AddRoom(new Room((9, 0), Flavor.Hallway));
+AddRoom(new Room((10, 0), Flavor.Hallway));
 
 AddRoom(new Room((2, 1), Flavor.A));
 AddRoom(new Room((2, 2), Flavor.A));
@@ -47,10 +49,10 @@ for (int x = 0; x < 10; x++)
     }
 }
 
-targetRooms.Add(Flavor.A, new[] { roomLookup[(2, 1)], roomLookup[(2, 2)] });
-targetRooms.Add(Flavor.B, new[] { roomLookup[(4, 1)], roomLookup[(4, 2)] });
-targetRooms.Add(Flavor.C, new[] { roomLookup[(6, 1)], roomLookup[(6, 2)] });
-targetRooms.Add(Flavor.D, new[] { roomLookup[(8, 1)], roomLookup[(8, 2)] });
+targetRooms[Flavor.A] = new[] { roomLookup[(2, 1)], roomLookup[(2, 2)] };
+targetRooms[Flavor.B] = new[] { roomLookup[(4, 1)], roomLookup[(4, 2)] };
+targetRooms[Flavor.C] = new[] { roomLookup[(6, 1)], roomLookup[(6, 2)] };
+targetRooms[Flavor.D] = new[] { roomLookup[(8, 1)], roomLookup[(8, 2)] };
 
 
 List<Amphipod> amphipods = new List<Amphipod>();
@@ -70,91 +72,196 @@ for (int sideRoom = 0; sideRoom < 4; sideRoom++)
     second.CurrentRoom = roomLookup[(2 + sideRoom * 2, 2)];
 }
 
-int bestSolution = int.MaxValue;
-
-Solve(0);
-
-Console.WriteLine($"The answer is: {bestSolution}");
+Console.WriteLine($"The answer is: {Solve()}");
 
 Console.WriteLine();
 Console.WriteLine("Star 2");
 Console.WriteLine();
-int output2 = 0;
+
+//Inserting:
+//    #D#C#B#A#
+//    #D#B#A#C#
+
+Flavor[] secondRow = new[] { Flavor.D, Flavor.C, Flavor.B, Flavor.A };
+Flavor[] thirdRow = new[] { Flavor.D, Flavor.B, Flavor.A, Flavor.C };
 
 
+AddRoom(new Room((2, 3), Flavor.A));
+AddRoom(new Room((2, 4), Flavor.A));
+
+AddRoom(new Room((4, 3), Flavor.B));
+AddRoom(new Room((4, 4), Flavor.B));
+
+AddRoom(new Room((6, 3), Flavor.C));
+AddRoom(new Room((6, 4), Flavor.C));
+
+AddRoom(new Room((8, 3), Flavor.D));
+AddRoom(new Room((8, 4), Flavor.D));
+
+for (int targetZone = 0; targetZone < 4; targetZone++)
+{
+    ConnectRooms(roomLookup[(2 + 2 * targetZone, 2)], roomLookup[(2 + 2 * targetZone, 3)]);
+    ConnectRooms(roomLookup[(2 + 2 * targetZone, 3)], roomLookup[(2 + 2 * targetZone, 4)]);
+}
 
 
-Console.WriteLine($"The answer is: {output2}");
+targetRooms[Flavor.A] = new[] { roomLookup[(2, 1)], roomLookup[(2, 2)], roomLookup[(2, 3)], roomLookup[(2, 4)] };
+targetRooms[Flavor.B] = new[] { roomLookup[(4, 1)], roomLookup[(4, 2)], roomLookup[(4, 3)], roomLookup[(4, 4)] };
+targetRooms[Flavor.C] = new[] { roomLookup[(6, 1)], roomLookup[(6, 2)], roomLookup[(6, 3)], roomLookup[(6, 4)] };
+targetRooms[Flavor.D] = new[] { roomLookup[(8, 1)], roomLookup[(8, 2)], roomLookup[(8, 3)], roomLookup[(8, 4)] };
+
+foreach (Room room in roomLookup.Values)
+{
+    room.Occupant = null;
+}
 
 
+amphipods.Clear();
+
+for (int sideRoom = 0; sideRoom < 4; sideRoom++)
+{
+    Amphipod[] newAmphipods = new[]
+    {
+        Parse(lines[2][3 + 2 * sideRoom]),
+        new Amphipod(secondRow[sideRoom]),
+        new Amphipod(thirdRow[sideRoom]),
+        Parse(lines[3][3 + 2 * sideRoom])
+    };
+
+    for (int i = 0; i < 4; i++)
+    {
+        amphipods.Add(newAmphipods[i]);
+
+        roomLookup[(2 + sideRoom * 2, i + 1)].Occupant = newAmphipods[i];
+        newAmphipods[i].CurrentRoom = roomLookup[(2 + sideRoom * 2, i + 1)];
+    }
+}
+
+Console.WriteLine($"The answer is: {Solve()}");
 
 Console.WriteLine();
 Console.ReadKey();
 
-
-
-void Solve(int cumulativeCost)
+string PrintState()
 {
-    if (cumulativeCost >= bestSolution)
+    StringBuilder builder = new StringBuilder();
+    
+    for (int x = 0; x < 11; x++)
     {
-        return;
+        builder.Append(PrintRoom(roomLookup[(x, 0)]));
+    }
+
+    for (int depth = 0; depth < targetRooms[0].Length; depth++)
+    {
+        for (int sideRoom = 0; sideRoom < 4; sideRoom++)
+        {
+            builder.Append(PrintRoom(targetRooms[(Flavor)sideRoom][depth]));
+        }
+    }
+
+    return builder.ToString();
+}
+
+static char PrintRoom(Room room)
+{
+    if (room.Occupant is not null)
+    {
+        return (char)(room.Occupant.flavor + 'A');
+    }
+    else
+    {
+        return '.';
+    }
+}
+
+
+int Solve()
+{
+    string boardState = PrintState();
+
+    if (costMap.ContainsKey(boardState))
+    {
+        return costMap[boardState];
     }
 
     //Check for completion HERE
     if (amphipods.All(x => x.CurrentRoom.flavor == x.flavor))
     {
         //Done
-        bestSolution = cumulativeCost;
-        return;
+        return 0;
     }
 
-    List<Amphipod> movableAmphipods = MovableAmphipods().ToList();
+    int bestSolution = int.MaxValue;
 
-    foreach (Amphipod amphipod in movableAmphipods)
+    foreach (Amphipod amphipod in MovableAmphipods())
     {
         Room initialRoom = amphipod.CurrentRoom;
 
-        List<Room> destinationRooms = ValidDestinations(amphipod).ToList();
-        foreach (Room destinationRoom in destinationRooms)
+        foreach (Room destinationRoom in ValidDestinations(amphipod))
         {
-            Solve(cumulativeCost + amphipod.Move(destinationRoom, false));
+            int moveCost = amphipod.Move(destinationRoom, false);
+            int solution = Solve();
+
+            if (solution != int.MaxValue)
+            {
+                bestSolution = Math.Min(bestSolution, moveCost + solution);
+            }
+
+            //Roll back move
             amphipod.Move(initialRoom, true);
         }
     }
+
+    costMap[boardState] = bestSolution;
+
+    return bestSolution;
 }
+
 
 IEnumerable<Amphipod> MovableAmphipods()
 {
-    Amphipod immediateTarget = amphipods.FirstOrDefault(x => x.CurrentRoom.coordinates.y == 0 &&
-        CanPathTo(x.CurrentRoom, targetRooms[x.flavor][0]) &&
-        targetRooms[x.flavor][0].Occupant is null &&
-        (targetRooms[x.flavor][1].Occupant is null || targetRooms[x.flavor][1].Occupant.flavor == x.flavor));
-
-    if (immediateTarget is not null)
-    {
-        yield return immediateTarget;
-        yield break;
-    }
-
+    //Initial check for easy free choices
     foreach (Amphipod amphipod in amphipods)
     {
-        if (amphipod.CurrentRoom.coordinates.y == 2)
+        if (amphipod.CurrentRoom.coordinates.y == 0 || !amphipod.HasMoved)
         {
-            if (!amphipod.HasMoved &&
-                roomLookup[amphipod.CurrentRoom.coordinates - Point2D.YAxis].Occupant is null)
+            for (int depth = targetRooms[amphipod.flavor].Length - 1; depth >= 0; depth--)
             {
-                yield return amphipod;
+                if (targetRooms[amphipod.flavor][depth].Occupant is null)
+                {
+                    if (CanPathTo(amphipod.CurrentRoom, targetRooms[amphipod.flavor][depth]))
+                    {
+                        yield return amphipod;
+                        yield break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else if (targetRooms[amphipod.flavor][depth].Occupant.flavor != amphipod.flavor)
+                {
+                    break;
+                }
             }
         }
-        else if (amphipod.CurrentRoom.coordinates.y == 1)
+    }
+
+    //Proper Scan
+    foreach (Amphipod amphipod in amphipods)
+    {
+        if (amphipod.CurrentRoom.coordinates.y > 0)
         {
-            if (!amphipod.HasMoved)
+            //Amphipod in a Target Room
+            if (!amphipod.HasMoved &&
+                CanPathTo(amphipod.CurrentRoom, roomLookup[(amphipod.CurrentRoom.coordinates.x, 0)]))
             {
                 yield return amphipod;
             }
         }
         else
         {
+            //Amphipod in the Hallway
             if (CanPathTo(amphipod.CurrentRoom, targetRooms[amphipod.flavor][0]))
             {
                 yield return amphipod;
@@ -231,10 +338,11 @@ IEnumerable<Room> ValidDestinations(Amphipod amphipod)
 {
     if (amphipod.CurrentRoom.coordinates.y > 0)
     {
+        //If Amphipod is in a side-room
         Point2D position = (amphipod.CurrentRoom.coordinates.x + 1, 0);
         while (roomLookup.ContainsKey(position) && roomLookup[position].Occupant is null)
         {
-            if (roomLookup[position].flavor == Flavor.Room)
+            if (roomLookup[position].flavor == Flavor.Hallway)
             {
                 yield return roomLookup[position];
             }
@@ -244,7 +352,7 @@ IEnumerable<Room> ValidDestinations(Amphipod amphipod)
         position = (amphipod.CurrentRoom.coordinates.x - 1, 0);
         while (roomLookup.ContainsKey(position) && roomLookup[position].Occupant is null)
         {
-            if (roomLookup[position].flavor == Flavor.Room)
+            if (roomLookup[position].flavor == Flavor.Hallway)
             {
                 yield return roomLookup[position];
             }
@@ -253,19 +361,20 @@ IEnumerable<Room> ValidDestinations(Amphipod amphipod)
     }
     else
     {
+        //Amphipod is in the hallway
         if (targetRooms[amphipod.flavor][0].Occupant is not null ||
             !CanPathTo(amphipod.CurrentRoom, targetRooms[amphipod.flavor][0]))
         {
             yield break;
         }
 
-        if (targetRooms[amphipod.flavor][1].Occupant is not null)
+        for (int i = targetRooms[amphipod.flavor].Length - 1; i >= 0; i--)
         {
-            yield return targetRooms[amphipod.flavor][0];
-        }
-        else
-        {
-            yield return targetRooms[amphipod.flavor][1];
+            if (targetRooms[amphipod.flavor][i].Occupant is null)
+            {
+                yield return targetRooms[amphipod.flavor][i];
+                yield break;
+            }
         }
     }
 }
@@ -341,7 +450,7 @@ class Amphipod
     {
         if (reverse)
         {
-            if (CurrentRoom.flavor == Flavor.Room)
+            if (IsTargetRoom(destinationRoom.flavor))
             {
                 HasMoved = false;
             }
@@ -351,7 +460,9 @@ class Amphipod
             HasMoved = true;
         }
 
-        int distance = (CurrentRoom.coordinates - destinationRoom.coordinates).TaxiCabLength;
+        int distance = Math.Abs(CurrentRoom.coordinates.x - destinationRoom.coordinates.x) +
+            CurrentRoom.coordinates.y +
+            destinationRoom.coordinates.y;
 
         CurrentRoom.Occupant = null;
 
@@ -360,6 +471,12 @@ class Amphipod
 
         return distance * GetMovementCost();
     }
+
+    public static bool IsTargetRoom(Flavor flavor) => flavor switch
+    {
+        Flavor.A or Flavor.B or Flavor.C or Flavor.D => true,
+        _ => false
+    };
 
     public override string ToString() => $"{flavor}: {CurrentRoom.coordinates}";
 }
@@ -371,6 +488,6 @@ enum Flavor
     C,
     D,
     Doorway,
-    Room,
+    Hallway,
     MAX
 }
