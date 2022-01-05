@@ -51,9 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22 - Reactor Reboot", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day23 - Amphipod", "Day23\Day23 - Amphipod.csproj", "{CEA35C1C-8849-4FAE-9121-E7F5A5910206}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day24", "Day24\Day24.csproj", "{BC04862E-D130-493A-B7E4-9FC4890D62A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day24 - Arithmetic Logic Unit", "Day24\Day24 - Arithmetic Logic Unit.csproj", "{BC04862E-D130-493A-B7E4-9FC4890D62A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day25", "Day25\Day25.csproj", "{3E5DD013-6887-40B1-94D4-48D73E4A0427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day25 - Sea Cucumber", "Day25\Day25 - Sea Cucumber.csproj", "{3E5DD013-6887-40B1-94D4-48D73E4A0427}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89708153-E258-4606-A4CD-4D7726648644}"
 	ProjectSection(SolutionItems) = preProject
@@ -85,7 +85,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		input22Test2.txt = input22Test2.txt
 		input23.txt = input23.txt
 		input24.txt = input24.txt
+		Input24Massaged.txt = Input24Massaged.txt
+		input24Massaged2.txt = input24Massaged2.txt
 		input25.txt = input25.txt
+		input25Test.txt = input25Test.txt
 	EndProjectSection
 EndProject
 Global
